@@ -1,0 +1,606 @@
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "cities"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "cities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "latitude" float, "longitude" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "exchanges"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "exchanges" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "is_active" boolean, "friend_initier_id" integer, "friend_receiver_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "start_date" datetime, "end_date" datetime)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX "index_exchanges_on_friend_initier_id" ON "exchanges" ("friend_initier_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_exchanges_on_friend_initier_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_exchanges_on_friend_initier_id' AND type='index'
+[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX "index_exchanges_on_friend_receiver_id" ON "exchanges" ("friend_receiver_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "friends"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "friends" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "birthday" date, "is_male" boolean, "description" varchar, "city_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "disabled" boolean DEFAULT 'f', "avatar_file_name" varchar, "avatar_content_type" varchar, "avatar_file_size" integer, "avatar_updated_at" datetime)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX "index_friends_on_city_id" ON "friends" ("city_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_friends_on_city_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_friends_on_city_id' AND type='index'
+[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX "index_friends_on_user_id" ON "friends" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tag_relations"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "tag_relations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "exchange_id" integer, "tag_id" integer, "friend_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX "index_tag_relations_on_exchange_id" ON "tag_relations" ("exchange_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX "index_tag_relations_on_friend_id" ON "tag_relations" ("friend_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tag_relations_on_friend_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tag_relations_on_friend_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX "index_tag_relations_on_tag_id" ON "tag_relations" ("tag_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "tags"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "label_male" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "label_female" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "first_name" varchar, "phone" varchar, "is_admin" boolean DEFAULT 'f')[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171216114657)[0m
+  [1m[35m (1.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171208173849),
+(20171211173749),
+(20171215114106),
+(20171208195351),
+(20171209165329),
+(20171208194347),
+(20171208195143),
+(20171209171030),
+(20171208170914),
+(20171208200032),
+(20171210161415),
+(20171212235955);
+
+[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-29 12:29:39.580028"], ["updated_at", "2018-11-29 12:29:39.580028"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "cities"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "cities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "latitude" float, "longitude" float, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "exchanges"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "exchanges" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "is_active" boolean, "friend_initier_id" integer, "friend_receiver_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "start_date" datetime, "end_date" datetime)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX "index_exchanges_on_friend_initier_id" ON "exchanges" ("friend_initier_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_exchanges_on_friend_initier_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_exchanges_on_friend_initier_id' AND type='index'
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_exchanges_on_friend_receiver_id" ON "exchanges" ("friend_receiver_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "friends"[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "friends" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "first_name" varchar, "birthday" date, "is_male" boolean, "description" varchar, "city_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "disabled" boolean DEFAULT 'f', "avatar_file_name" varchar, "avatar_content_type" varchar, "avatar_file_size" integer, "avatar_updated_at" datetime)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX "index_friends_on_city_id" ON "friends" ("city_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_friends_on_city_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_friends_on_city_id' AND type='index'
+[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_friends_on_user_id" ON "friends" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tag_relations"[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "tag_relations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "exchange_id" integer, "tag_id" integer, "friend_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_tag_relations_on_exchange_id" ON "tag_relations" ("exchange_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX "index_tag_relations_on_friend_id" ON "tag_relations" ("friend_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tag_relations_on_friend_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tag_relations_on_friend_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_tag_relations_on_exchange_id' AND type='index'
+[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX "index_tag_relations_on_tag_id" ON "tag_relations" ("tag_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "tags"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "label_male" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "label_female" varchar)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar, "last_sign_in_ip" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "first_name" varchar, "phone" varchar, "is_admin" boolean DEFAULT 'f')[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20171216114657)[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20171208173849),
+(20171211173749),
+(20171215114106),
+(20171208195351),
+(20171209165329),
+(20171208194347),
+(20171208195143),
+(20171209171030),
+(20171208170914),
+(20171208200032),
+(20171210161415),
+(20171212235955);
+
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-11-29 12:29:39.634910"], ["updated_at", "2018-11-29 12:29:39.634910"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "test@test"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone", "is_admin") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["email", "test@test"], ["encrypted_password", "$2a$11$JgHlo1JiwdjpcHjSpEEBPeLPCdx2F.MO4cb7xl7HfrGeC1IG5rPjq"], ["created_at", "2018-11-29 12:29:39.785557"], ["updated_at", "2018-11-29 12:29:39.785557"], ["first_name", "Admin"], ["phone", "0600000000"], ["is_admin", "t"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "antonin.659@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "antonin.659@gmail.com"], ["encrypted_password", "$2a$11$wjiSALNLYLBzhe1P//dlteKDgE5gNsSm0358fJSc17jhUE1bnQ3ve"], ["created_at", "2018-11-29 12:29:39.987367"], ["updated_at", "2018-11-29 12:29:39.987367"], ["first_name", "Antonin"], ["phone", "0675951416"]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "maelys.464@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "maelys.464@gmail.com"], ["encrypted_password", "$2a$11$t.D4vsQwOM6CX3Unk.MB..NK8cILO7Na5q.EMjgbd/migcNfQ9V7O"], ["created_at", "2018-11-29 12:29:40.108800"], ["updated_at", "2018-11-29 12:29:40.108800"], ["first_name", "Maëlys"], ["phone", "0633175026"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "giulia.731@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "giulia.731@gmail.com"], ["encrypted_password", "$2a$11$gDvVbanDUEjSJcsZ9JhXDOldUOYZh0bWK9wi6/GNE7zdR30bQg2ZS"], ["created_at", "2018-11-29 12:29:40.224771"], ["updated_at", "2018-11-29 12:29:40.224771"], ["first_name", "Giulia"], ["phone", "0657100926"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "leonie.249@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "leonie.249@gmail.com"], ["encrypted_password", "$2a$11$hUFYEpu1vity6lKhHLiXIuYqho8NsAAj7EM5NvhZbiifV0EodQHxC"], ["created_at", "2018-11-29 12:29:40.344087"], ["updated_at", "2018-11-29 12:29:40.344087"], ["first_name", "Léonie"], ["phone", "0636135456"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "capucine.591@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "capucine.591@gmail.com"], ["encrypted_password", "$2a$11$HlkPfK6NZ8W8f8FYR07zsuEqVs5zHd2hvd1RafvPOFFh.ZJfn5x/e"], ["created_at", "2018-11-29 12:29:40.456729"], ["updated_at", "2018-11-29 12:29:40.456729"], ["first_name", "Capucine"], ["phone", "0694725514"]]
+  [1m[35m (2.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "raphael.31@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "raphael.31@gmail.com"], ["encrypted_password", "$2a$11$MgBz1x.Dq7O1IiNy8SpZsOlJFSQI9kpxgClfNXy37q/zYX/sMV7jO"], ["created_at", "2018-11-29 12:29:40.579417"], ["updated_at", "2018-11-29 12:29:40.579417"], ["first_name", "Raphaël"], ["phone", "0617079715"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "anna.143@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "anna.143@gmail.com"], ["encrypted_password", "$2a$11$wzqNM3qb0sye2j8j5R3XJO2GVtCqPDLFGFN/tYaXbDxk8I/EuGjXS"], ["created_at", "2018-11-29 12:29:40.691716"], ["updated_at", "2018-11-29 12:29:40.691716"], ["first_name", "Anna"], ["phone", "0652027336"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "clara.676@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "clara.676@gmail.com"], ["encrypted_password", "$2a$11$3LN08HmGGrqnSgbd/ccPdeMZCKr0qDPPI4D6woyJQeVAH9hO.HD8a"], ["created_at", "2018-11-29 12:29:40.810324"], ["updated_at", "2018-11-29 12:29:40.810324"], ["first_name", "Clara"], ["phone", "0603730931"]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "arthur.513@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "arthur.513@gmail.com"], ["encrypted_password", "$2a$11$RhY1Td8ULc6MDVRBlGhKbu/l.habLj6hY/eDhkuddz4A7OUW1CQqi"], ["created_at", "2018-11-29 12:29:40.925842"], ["updated_at", "2018-11-29 12:29:40.925842"], ["first_name", "Arthur"], ["phone", "0628384925"]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "eden.460@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "eden.460@gmail.com"], ["encrypted_password", "$2a$11$4sapJ7C9b58J1iQbgyAjNetRF6ctw0Xwv9X443zuM0DRzxM0uHLe6"], ["created_at", "2018-11-29 12:29:41.041219"], ["updated_at", "2018-11-29 12:29:41.041219"], ["first_name", "Eden"], ["phone", "0694146969"]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "emy.425@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "emy.425@gmail.com"], ["encrypted_password", "$2a$11$HVZVlOvz8qgR8MHAjp4dUeNWQ4K3Tal2LQs2qYeSsnDWELHflV49e"], ["created_at", "2018-11-29 12:29:41.156437"], ["updated_at", "2018-11-29 12:29:41.156437"], ["first_name", "Emy"], ["phone", "0683416456"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "jeanne.651@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "jeanne.651@gmail.com"], ["encrypted_password", "$2a$11$Wg11ZDMe34T7fmvlmxvI1uxcYrlg/IPJ7MedE9CetsnseZK2eu2sq"], ["created_at", "2018-11-29 12:29:41.271779"], ["updated_at", "2018-11-29 12:29:41.271779"], ["first_name", "Jeanne"], ["phone", "0687483301"]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "alexis.577@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "alexis.577@gmail.com"], ["encrypted_password", "$2a$11$bc4.5wbI7Vzs.6yn6934JO3Yl7a0T92uCCC0.3MSulogLE0U7r3nG"], ["created_at", "2018-11-29 12:29:41.384112"], ["updated_at", "2018-11-29 12:29:41.384112"], ["first_name", "Alexis"], ["phone", "0614812164"]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "noa.355@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "noa.355@gmail.com"], ["encrypted_password", "$2a$11$yKat0ETtFyQeH87DVusbnOd1/7Q1.RDuCXwUdsyIjIGXmxCv/sIW."], ["created_at", "2018-11-29 12:29:41.502047"], ["updated_at", "2018-11-29 12:29:41.502047"], ["first_name", "Noa"], ["phone", "0639499577"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "augustin.968@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "augustin.968@gmail.com"], ["encrypted_password", "$2a$11$6Ly9P0lnzdvQDwHFaM5jwelCkLozxacTIl4jK2XKR57hKAnUKVbEK"], ["created_at", "2018-11-29 12:29:41.613383"], ["updated_at", "2018-11-29 12:29:41.613383"], ["first_name", "Augustin"], ["phone", "0616309419"]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "noemie.837@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "noemie.837@gmail.com"], ["encrypted_password", "$2a$11$z2cmx2rBRnJ0qpGvpR6mRuuWoxpX1naSEf5zmcfRM3izVZ9PxXFke"], ["created_at", "2018-11-29 12:29:41.729646"], ["updated_at", "2018-11-29 12:29:41.729646"], ["first_name", "Noémie"], ["phone", "0641215574"]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "clara.738@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "clara.738@gmail.com"], ["encrypted_password", "$2a$11$uSXL8TDVBWIs2E3WyBC.SumCtzFidv4B59jBURKVGRd08ZtItAVai"], ["created_at", "2018-11-29 12:29:41.843471"], ["updated_at", "2018-11-29 12:29:41.843471"], ["first_name", "Clara"], ["phone", "0602844511"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "anna.831@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "anna.831@gmail.com"], ["encrypted_password", "$2a$11$ALPGMxylTjHasMHWxV6MjuGZDkJx25qpsKN8Hdtz5VxE5gsrAVYxi"], ["created_at", "2018-11-29 12:29:41.955804"], ["updated_at", "2018-11-29 12:29:41.955804"], ["first_name", "Anna"], ["phone", "0619890128"]]
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.1ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "augustin.714@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "augustin.714@gmail.com"], ["encrypted_password", "$2a$11$sMdY2L5j9QbLv3SC0FY7negMcH0zzxfERAN14NhEg3u1SCBQPKoZu"], ["created_at", "2018-11-29 12:29:42.078886"], ["updated_at", "2018-11-29 12:29:42.078886"], ["first_name", "Augustin"], ["phone", "0617267854"]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "marius.309@gmail.com"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "first_name", "phone") VALUES (?, ?, ?, ?, ?, ?)[0m  [["email", "marius.309@gmail.com"], ["encrypted_password", "$2a$11$X5u/kWCl8ewSH938aKdzVe7pLSWRbyJkpnLaV12EatKKVmsB80Fxi"], ["created_at", "2018-11-29 12:29:42.192271"], ["updated_at", "2018-11-29 12:29:42.192271"], ["first_name", "Marius"], ["phone", "0614829475"]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "latitude", "longitude", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Paris"], ["latitude", 48.86471], ["longitude", 2.34901], ["created_at", "2018-11-29 12:29:42.208393"], ["updated_at", "2018-11-29 12:29:42.208393"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "latitude", "longitude", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Lyon"], ["latitude", 45.74846], ["longitude", 4.84671], ["created_at", "2018-11-29 12:29:42.211212"], ["updated_at", "2018-11-29 12:29:42.211212"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "latitude", "longitude", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Toulouse"], ["latitude", 43.60426], ["longitude", 1.44367], ["created_at", "2018-11-29 12:29:42.213628"], ["updated_at", "2018-11-29 12:29:42.213628"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "cities" ("name", "latitude", "longitude", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Bordeaux"], ["latitude", 44.83615], ["longitude", -0.58081], ["created_at", "2018-11-29 12:29:42.216601"], ["updated_at", "2018-11-29 12:29:42.216601"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Sportif"], ["created_at", "2018-11-29 12:29:42.225511"], ["updated_at", "2018-11-29 12:29:42.225511"], ["label_female", "Sportive"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Créatif"], ["created_at", "2018-11-29 12:29:42.227963"], ["updated_at", "2018-11-29 12:29:42.227963"], ["label_female", "Créative"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Cuisine"], ["created_at", "2018-11-29 12:29:42.230515"], ["updated_at", "2018-11-29 12:29:42.230515"], ["label_female", "Cuisine"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Voyage"], ["created_at", "2018-11-29 12:29:42.233896"], ["updated_at", "2018-11-29 12:29:42.233896"], ["label_female", "Voyage"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Drôle"], ["created_at", "2018-11-29 12:29:42.236907"], ["updated_at", "2018-11-29 12:29:42.236907"], ["label_female", "Drôle"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Rapide"], ["created_at", "2018-11-29 12:29:42.239332"], ["updated_at", "2018-11-29 12:29:42.239332"], ["label_female", "Rapide"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Musclé"], ["created_at", "2018-11-29 12:29:42.242106"], ["updated_at", "2018-11-29 12:29:42.242106"], ["label_female", "Musclée"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Intelligent"], ["created_at", "2018-11-29 12:29:42.244733"], ["updated_at", "2018-11-29 12:29:42.244733"], ["label_female", "Intelligente"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Grand"], ["created_at", "2018-11-29 12:29:42.246908"], ["updated_at", "2018-11-29 12:29:42.246908"], ["label_female", "Grande"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Petit"], ["created_at", "2018-11-29 12:29:42.250044"], ["updated_at", "2018-11-29 12:29:42.250044"], ["label_female", "Petite"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Patient"], ["created_at", "2018-11-29 12:29:42.252765"], ["updated_at", "2018-11-29 12:29:42.252765"], ["label_female", "Patiente"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Sympa"], ["created_at", "2018-11-29 12:29:42.255561"], ["updated_at", "2018-11-29 12:29:42.255561"], ["label_female", "Sympa"]]
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Corrosif"], ["created_at", "2018-11-29 12:29:42.258596"], ["updated_at", "2018-11-29 12:29:42.258596"], ["label_female", "Corrosive"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Méchant"], ["created_at", "2018-11-29 12:29:42.261108"], ["updated_at", "2018-11-29 12:29:42.261108"], ["label_female", "Méchante"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "tags" ("label_male", "created_at", "updated_at", "label_female") VALUES (?, ?, ?, ?)[0m  [["label_male", "Lent"], ["created_at", "2018-11-29 12:29:42.264398"], ["updated_at", "2018-11-29 12:29:42.264398"], ["label_female", "Lente"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+Command :: file -b --mime '/var/folders/ss/g5zc5dwd3bvc5_jms7c6z7cc0000gn/T/c4ca4238a0b923820dcc509a6f75849b20181129-13320-1wpjyuf.jpg'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/var/folders/ss/g5zc5dwd3bvc5_jms7c6z7cc0000gn/T/c4ca4238a0b923820dcc509a6f75849b20181129-13320-1uzsi4a.jpg[0]' 2>/dev/null
+Started GET "/" for 127.0.0.1 at 2018-11-29 20:30:13 +0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (1.0ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.7ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (5.6ms)
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (136.0ms)
+  Rendered shared/_flash.html.erb (0.7ms)
+Completed 200 OK in 1565ms (Views: 1483.3ms | ActiveRecord: 4.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 20:30:28 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (2.3ms)
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (12.2ms)
+  Rendered shared/_flash.html.erb (0.6ms)
+Completed 200 OK in 46ms (Views: 39.4ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 20:53:40 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.4ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.4ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (3.1ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (18.5ms)
+  Rendered shared/_flash.html.erb (0.7ms)
+Completed 200 OK in 81ms (Views: 70.5ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 20:55:04 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.5ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.6ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (4.9ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (11.8ms)
+  Rendered shared/_flash.html.erb (0.5ms)
+Completed 200 OK in 60ms (Views: 51.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/auth/login" for 127.0.0.1 at 2018-11-29 20:55:11 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (14.8ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (10.8ms)
+  Rendered shared/_flash.html.erb (1.0ms)
+  Rendered layouts/_devise.html.erb (3.4ms)
+  Rendered shared/_flash.html.erb (0.6ms)
+Completed 200 OK in 98ms (Views: 58.7ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2018-11-29 20:55:48 +0800
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"hAcevMDs5wjlBELOe2b0MHt4o3qVMg85eAFOUe3Aa+Q4tj3N8/OrvXIAQbQUg3Q4g9hDc4ZLbX8FPKn+uw8WAg==", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Connexion"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "test@test"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "current_sign_in_ip" = ?, "last_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2018-11-29 12:55:48.941424"], ["last_sign_in_at", "2018-11-29 12:55:48.941424"], ["current_sign_in_ip", "127.0.0.1"], ["last_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", "2018-11-29 12:55:48.942384"], ["id", 1]]
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 180ms (ActiveRecord: 3.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 20:55:48 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.7ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (1.7ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (11.3ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+Completed 200 OK in 43ms (Views: 36.6ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/friends" for 127.0.0.1 at 2018-11-29 20:55:55 +0800
+Processing by FriendsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered shared/_flash.html.erb (0.7ms)
+  [1m[36mFriend Load (0.2ms)[0m  [1m[34mSELECT "friends".* FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered friends/index.html.erb within layouts/application (6.5ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (8.4ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+Completed 200 OK in 51ms (Views: 44.9ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/friends/new" for 127.0.0.1 at 2018-11-29 20:55:59 +0800
+Processing by FriendsController#new as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/new.html.erb within layouts/application
+  Rendered shared/_flash.html.erb (0.9ms)
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  Rendered friends/_form.html.erb (20.1ms)
+  Rendered friends/new.html.erb within layouts/application (27.8ms)
+  [1m[36mCACHE Tag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (7.5ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+Completed 200 OK in 77ms (Views: 56.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/friends/new" for 127.0.0.1 at 2018-11-29 20:56:29 +0800
+Processing by FriendsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/new.html.erb within layouts/application
+  Rendered shared/_flash.html.erb (0.7ms)
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  Rendered friends/_form.html.erb (28.1ms)
+  Rendered friends/new.html.erb within layouts/application (34.0ms)
+  [1m[36mCACHE Tag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCACHE City Load (0.0ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (8.5ms)
+  Rendered shared/_flash.html.erb (0.6ms)
+Completed 200 OK in 74ms (Views: 69.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/friends" for 127.0.0.1 at 2018-11-29 20:57:17 +0800
+Processing by FriendsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered shared/_flash.html.erb (0.6ms)
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT "friends".* FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered friends/index.html.erb within layouts/application (7.6ms)
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (14.9ms)
+  Rendered shared/_flash.html.erb (0.5ms)
+Completed 200 OK in 70ms (Views: 62.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/friends" for 127.0.0.1 at 2018-11-29 20:57:30 +0800
+Processing by FriendsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered shared/_flash.html.erb (0.4ms)
+  [1m[36mFriend Load (0.2ms)[0m  [1m[34mSELECT "friends".* FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered friends/index.html.erb within layouts/application (4.7ms)
+  [1m[36mTag Load (0.5ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (10.3ms)
+  Rendered shared/_flash.html.erb (0.6ms)
+Completed 200 OK in 48ms (Views: 42.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/friends" for 127.0.0.1 at 2018-11-29 21:00:35 +0800
+Processing by FriendsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered shared/_flash.html.erb (0.4ms)
+  [1m[36mFriend Load (0.2ms)[0m  [1m[34mSELECT "friends".* FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered friends/index.html.erb within layouts/application (4.5ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (8.9ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+Completed 200 OK in 45ms (Views: 39.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/friends" for 127.0.0.1 at 2018-11-29 21:00:48 +0800
+Processing by FriendsController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering friends/index.html.erb within layouts/application
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered shared/_flash.html.erb (0.6ms)
+  [1m[36mFriend Load (0.1ms)[0m  [1m[34mSELECT "friends".* FROM "friends" WHERE "friends"."user_id" = 1[0m
+  Rendered friends/index.html.erb within layouts/application (6.6ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (9.1ms)
+  Rendered shared/_flash.html.erb (0.5ms)
+Completed 200 OK in 49ms (Views: 42.9ms | ActiveRecord: 1.1ms)
+
+
+Started DELETE "/auth/logout" for 127.0.0.1 at 2018-11-29 21:01:00 +0800
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"hbzW2JPjVJFBnyJsJQ7atj+GkfnCRJWakWO0MZIRuA/9NPqzHfwRuH5skmK7apraUqMNTnri8r+2IQvrTJGw3Q=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 10ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 21:01:00 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.3ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (2.0ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (10.2ms)
+  Rendered shared/_flash.html.erb (0.5ms)
+Completed 200 OK in 45ms (Views: 37.8ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 21:02:24 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.3ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (2.4ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (7.7ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+Completed 200 OK in 49ms (Views: 44.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-11-29 21:02:46 +0800
+Processing by PagesController#index as HTML
+  [1m[36mCity Load (0.2ms)[0m  [1m[34mSELECT  "cities".* FROM "cities" ORDER BY "cities"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT tags.*, cities.id as city_id, cities.name as city_name, COUNT(DISTINCT friends.id) as count FROM "tags" INNER JOIN "tag_relations" ON "tag_relations"."tag_id" = "tags"."id" INNER JOIN "tag_relations" "tag_relations_tags_join" ON "tag_relations_tags_join"."tag_id" = "tags"."id" INNER JOIN "friends" ON "friends"."id" = "tag_relations_tags_join"."friend_id" INNER JOIN cities ON cities.id = friends.city_id WHERE "friends"."disabled" = ? GROUP BY cities.id, tags.id[0m  [["disabled", "f"]]
+  Rendering pages/index.html.erb within layouts/application
+  [1m[36mFriend Load (0.3ms)[0m  [1m[34mSELECT  friends.*, COUNT(DISTINCT tag_relations.exchange_id) as exchanges_count FROM "friends" INNER JOIN "tag_relations" ON "tag_relations"."friend_id" = "friends"."id" WHERE "friends"."disabled" = ? AND "friends"."disabled" = ? GROUP BY "friends"."id" ORDER BY exchanges_count desc LIMIT ?[0m  [["disabled", "f"], ["disabled", "f"], ["LIMIT", 20]]
+  Rendered pages/index.html.erb within layouts/application (2.5ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (8.2ms)
+  Rendered shared/_flash.html.erb (0.6ms)
+Completed 200 OK in 48ms (Views: 42.1ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/auth/login" for 127.0.0.1 at 2018-11-29 21:02:52 +0800
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (7.1ms)
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags"[0m
+  [1m[36mCity Load (0.1ms)[0m  [1m[34mSELECT "cities".* FROM "cities"[0m
+  Rendered shared/_navbar.html.erb (7.4ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+  Rendered layouts/_devise.html.erb (2.4ms)
+  Rendered shared/_flash.html.erb (0.4ms)
+Completed 200 OK in 53ms (Views: 51.6ms | ActiveRecord: 0.3ms)
+
+

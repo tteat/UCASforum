@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_active: false
+  friend_initier: one
+  friend_receiver: one
+
+two:
+  is_active: false
+  friend_initier: two
+  friend_receiver: two
