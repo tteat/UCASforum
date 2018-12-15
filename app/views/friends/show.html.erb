@@ -28,7 +28,7 @@
       <%= link_to 'Modifier', edit_friend_path(@friend), class: 'btn btn-success' %>
     <% else %>
       <% if !user_signed_in? %>
-        <%= link_to "Connexion", new_user_session_path, class: 'btn btn-primary' %>
+        <%= link_to "登录", new_user_session_path, class: 'btn btn-primary' %>
       <% elsif @can_exchange %>
         <button class="btn btn-primary" data-toggle="modal" data-target="#exchange-modal">
           Échanger
