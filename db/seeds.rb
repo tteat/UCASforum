@@ -46,29 +46,29 @@ end
 # Cities
 puts 'Creating 4 cities...'
 cities = []
-cities << City.create!(name: 'Paris', latitude: 48.86471, longitude: 2.34901)
-cities << City.create!(name: 'Lyon', latitude: 45.74846, longitude: 4.84671)
-cities << City.create!(name: 'Toulouse', latitude: 43.60426, longitude: 1.44367)
-cities << City.create!(name: 'Bordeaux', latitude: 44.83615, longitude: -0.58081)
+cities << City.create!(name: '科技', latitude: 48.86471, longitude: 2.34901)
+cities << City.create!(name: '文学', latitude: 45.74846, longitude: 4.84671)
+cities << City.create!(name: '生活', latitude: 43.60426, longitude: 1.44367)
+cities << City.create!(name: '人文社科', latitude: 44.83615, longitude: -0.58081)
 
 # Tags
 puts 'Creating 15 tags...'
 tags = []
-tags << Tag.create!(label_male: 'Sportif', label_female: 'Sportive')
-tags << Tag.create!(label_male: 'Créatif', label_female: 'Créative')
-tags << Tag.create!(label_male: 'Cuisine', label_female: 'Cuisine')
-tags << Tag.create!(label_male: 'Voyage', label_female: 'Voyage')
-tags << Tag.create!(label_male: 'Drôle', label_female: 'Drôle')
-tags << Tag.create!(label_male: 'Rapide', label_female: 'Rapide')
-tags << Tag.create!(label_male: 'Musclé', label_female: 'Musclée')
-tags << Tag.create!(label_male: 'Intelligent', label_female: 'Intelligente')
-tags << Tag.create!(label_male: 'Grand', label_female: 'Grande')
-tags << Tag.create!(label_male: 'Petit', label_female: 'Petite')
-tags << Tag.create!(label_male: 'Patient', label_female: 'Patiente')
-tags << Tag.create!(label_male: 'Sympa', label_female: 'Sympa')
-tags << Tag.create!(label_male: 'Corrosif', label_female: 'Corrosive')
-tags << Tag.create!(label_male: 'Méchant', label_female: 'Méchante')
-tags << Tag.create!(label_male: 'Lent', label_female: 'Lente')
+tags << Tag.create!(label_male: '搞笑幽默', label_female: '搞笑幽默')
+tags << Tag.create!(label_male: '心灵治愈', label_female: '心灵治愈')
+tags << Tag.create!(label_male: '名著经典', label_female: '名著经典')
+tags << Tag.create!(label_male: '推理悬疑', label_female: '推理悬疑')
+tags << Tag.create!(label_male: '人物传记', label_female: '人物传记')
+tags << Tag.create!(label_male: '成功励志', label_female: '成功励志')
+tags << Tag.create!(label_male: '互联网+', label_female: '互联网+')
+tags << Tag.create!(label_male: '青春言情', label_female: '青春言情')
+tags << Tag.create!(label_male: '经济管理', label_female: '经济管理')
+tags << Tag.create!(label_male: '社交之道', label_female: '社交之道')
+tags << Tag.create!(label_male: '心理百科', label_female: '心理百科')
+tags << Tag.create!(label_male: '历史小说', label_female: '历史小说')
+tags << Tag.create!(label_male: '科幻武侠', label_female: '科幻武侠')
+tags << Tag.create!(label_male: '美食烹饪', label_female: '美食烹饪')
+tags << Tag.create!(label_male: '旅游摄影', label_female: '旅游摄影')
 
 # Friends
 puts "Creating #{friends_count} friends, linked to ~#{friends_count * 3} tags..."
