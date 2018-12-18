@@ -2,20 +2,17 @@
 users_count = 20
 friends_count = 50
 
-first_names_male = %w[
-  Jules Léo Maël Gabriel Raphaël Sacha Hugo Ethan Arthur Nathan Louis
-  Lucas Tom Liam Gabin Paul Clément Théo Noé Antoine Nolan Axel Valentin
-  Mathis Maxence Timéo Baptiste Noah Aaron Eliott Maxime Martin Victor
-  Enzo Marius Robin Malo Samuel Alexis Estéban Mathéo Thomas Léon Noa
-  Sasha Adam Marceau Antonin Augustin Mahé
+first_names_male = [
+    "Data Mining", "The ABC Murders","PRIDE AND PREJUDICE","THE GRAPES OF WRATH","UTRILLO","Je mange ce qui me reussit",
+    "CAROL SHIELDS","modern greece","PRACTICAL ETHICS FOR YOU","FOREIGN AFFAIRS","仁成","THE DRY","HURDLING STEEPLECHASING",
+    "US AND THEM","THE REVENGE OF GAIA","GHOSTLY ENCOUNI IN SINGAPORE","FALL OF ANGELS","THE BACK OF THE NAPKIN","THE 7 HABITS",
+    "CODES OF LOVE","LAPITTURA ITALIANA","HARRY POTTER","CATHETINE COULTER","STATISTICS","THE WASTE LAND"
 ]
 
 first_names_female = %w[
-  Emma Louise Léna Chloé Camille Manon Jade Alice Léa Zoé Lola Mila
-  Julia Inès Agathe Juliette Lucie Élise Eden Rose Ambre Mia Éléna
-  Léonie Lou Anna Margaux Léana Clémence Capucine Clara Eva Romane
-  Mathilde Soline Jeanne Maëlys Charlotte Noémie Nina Olivia Justine
-  Lilou Louna Candice Emy Giulia Elsa Charlie Léane
+  动物农庄 计算机体系结构 Linux内核设计 软件工程 大清十二帝 Chrome扩展开发 月亮和六便士 数学之美 C++ 爱与生的苦恼 Java编程思想 史记
+  算法讲义 旧山河 无声告白 哲学家们都干了些什么 人间失格 倚天屠龙记 我们仨 白说 活着 你好旧时光 半小时漫画中国史
+  目送 我这一辈子
 ]
 
 first_names = first_names_male + first_names_female

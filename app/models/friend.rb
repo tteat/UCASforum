@@ -64,9 +64,9 @@ class Friend < ApplicationRecord
   # VALIDATION
 
   validates :avatar, presence: true
-  validates :first_name, length: { in: 3..50 }
+  validates :first_name, length: { in: 2..50 }
   validates :birthday, presence: true
-  validates :description, length: { in: 10..500 }
+  validates :description, length: { in: 2..500 }
   validates :city_id, presence: true
   validates :user_id, presence: true
 
