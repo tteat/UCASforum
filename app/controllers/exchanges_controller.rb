@@ -32,7 +32,7 @@ class ExchangesController < ApplicationController
     check_exchange_author && return
     @exchange = Exchange.new(exchange_params_create)
     if @exchange.save
-      redirect_to exchanges_url, notice: "L'échange a débuté !"
+      redirect_to exchanges_url, notice: "交流已经开始了！"
     else
       render :new
     end
@@ -44,7 +44,7 @@ class ExchangesController < ApplicationController
 
   def post_finish
     if @exchange.update(is_active: false)
-      redirect_to exchanges_get_rate_path(id: @exchange.id), notice: 'Échange terminé !'
+      redirect_to exchanges_get_rate_path(id: @exchange.id), notice: '交换完了！'
     else
       render :finish
     end
@@ -59,7 +59,7 @@ class ExchangesController < ApplicationController
     @friend = distinct_friends(@exchange).second
 
     if @exchange.update(exchange_params_rate)
-      redirect_to exchanges_path, notice: 'Notation sauvegardée !'
+      redirect_to exchanges_path, notice: '保存的符号！'
     else
       render :rate
     end

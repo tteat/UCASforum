@@ -2,79 +2,79 @@
 fr:
   activerecord:
     models:
-      city: Ville
-      exchange: Échange
+      city: city
+      exchange: exchange
       friend: Ami
       tag_relation: Tag
       tag: Tag
-      user: Utilisateur
+      user: user
     attributes:
       user:
-        email: "L'email"
-        password: "Le mot de passe"
-        current_password: "Le mot de passe actuel"
-        first_name: "Le prénom"
-        phone: "Le téléphone"
+        email: "email"
+        password: "密码"
+        current_password: "当前密码"
+        first_name: "姓名"
+        phone: "电话"
       friend:
-        avatar: "L'avatar"
-        first_name: "Le prénom"
-        description: "La description"
-        disabled: "Désactivé"
+        avatar: "头像"
+        first_name: "姓名"
+        description: "描述"
+        disabled: "已禁用"
     errors:
       messages:
-        record_invalid: 'La validation a échoué : %{errors}'
+        record_invalid: '验证失败: %{errors}'
         restrict_dependent_destroy:
-          has_one: "Vous ne pouvez pas supprimer l'enregistrement car un(e) %{record} dépendant(e) existe"
-          has_many: "Vous ne pouvez pas supprimer l'enregistrement parce que les %{record} dépendants existent"
+          has_one: "您无法删除记录，因为存在依赖的％{record}"
+          has_many: "您无法删除记录，因为存在％{record}依赖项"
   date:
     abbr_day_names:
-    - dim
-    - lun
-    - mar
-    - mer
-    - jeu
-    - ven
-    - sam
+    - 周日
+    - 周一
+    - 周二
+    - 周三
+    - 周四
+    - 周五
+    - 周六
     abbr_month_names:
     -
-    - jan.
-    - fév.
-    - mar.
-    - avr.
-    - mai
-    - juin
-    - juil.
-    - août
-    - sept.
-    - oct.
-    - nov.
-    - déc.
+    - 一月
+    - 二月
+    - 三月
+    - 四月
+    - 五月
+    - 六月
+    - 七月
+    - 八月
+    - 九月
+    - 十月
+    - 十一月
+    - 十二月
     day_names:
-    - dimanche
-    - lundi
-    - mardi
-    - mercredi
-    - jeudi
-    - vendredi
-    - samedi
+    - 周日
+    - 周一
+    - 周二
+    - 周三
+    - 周四
+    - 周五
+    - 周六
     formats:
       default: "%d/%m/%Y"
       short: "%e %b"
       long: "%e %B %Y"
     month_names:
     -
-    - janvier
-    - février
-    - mars
-    - avril
-    - mai
-    - juin
-    - juillet
-    - août
-    - septembre
-    - octobre
-    - novembre
-    - décembre
+    - 一月
+    - 二月
+    - 三月
+    - 四月
+    - 五月
+    - 六月
+    - 七月
+    - 八月
+    - 九月
+    - 十月
+    - 十一月
+    - 十二月
     order:
     - :day
     - :month
@@ -82,96 +82,96 @@ fr:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: environ une heure
-        other: environ %{count} heures
+        one: 大约一个小时
+        other: 大约{count}个小时
       about_x_months:
-        one: environ un mois
-        other: environ %{count} mois
+        one: 大约一个月
+        other: 大约%{count}个月
       about_x_years:
-        one: environ un an
-        other: environ %{count} ans
+        one: 大约一年
+        other: 大约%{count}年
       almost_x_years:
-        one: presqu'un an
-        other: presque %{count} ans
-      half_a_minute: une demi-minute
+        one: 差不多一年
+        other: 差不多%{count}年
+      half_a_minute: 半分钟
       less_than_x_minutes:
-        zero: moins d'une minute
-        one: moins d'une minute
-        other: moins de %{count} minutes
+        zero: 不到一分钟
+        one: 不到一分钟
+        other: 小于%{count}分钟
       less_than_x_seconds:
-        zero: moins d'une seconde
-        one: moins d'une seconde
-        other: moins de %{count} secondes
+        zero: 不到一秒钟
+        one: 不到一秒钟
+        other: 不到 %{count}秒钟
       over_x_years:
-        one: plus d'un an
-        other: plus de %{count} ans
+        one: 超过一年
+        other: 超过%{count}年
       x_days:
-        one: 1 jour
-        other: "%{count} jours"
+        one: 1天
+        other: "%{count}天"
       x_minutes:
-        one: 1 minute
-        other: "%{count} minutes"
+        one: 1分钟
+        other: "%{count}分钟"
       x_months:
-        one: 1 mois
-        other: "%{count} mois"
+        one: 1个月
+        other: "%{count}个月"
       x_years:
-        one: un an
-        other: "%{count} ans"
+        one: 1年
+        other: "%{count}年"
       x_seconds:
-        one: 1 seconde
-        other: "%{count} secondes"
+        one: 1秒
+        other: "%{count}秒"
     prompts:
-      day: Jour
-      hour: Heure
-      minute: Minute
-      month: Mois
-      second: Seconde
-      year: Année
+      day: 天
+      hour: 小时
+      minute: 分钟
+      month: 月
+      second: 秒
+      year: 年
   errors:
     format: "%{attribute} %{message}"
     messages:
-      accepted: doit être accepté(e)
-      blank: doit être rempli(e)
-      present: doit être vide
-      confirmation: ne concorde pas avec %{attribute}
-      empty: doit être rempli(e)
-      equal_to: doit être égal à %{count}
-      even: doit être pair
-      exclusion: n'est pas disponible
-      greater_than: doit être supérieur à %{count}
-      greater_than_or_equal_to: doit être supérieur ou égal à %{count}
-      inclusion: n'est pas inclus(e) dans la liste
-      invalid: n'est pas valide
-      less_than: doit être inférieur à %{count}
-      less_than_or_equal_to: doit être inférieur ou égal à %{count}
-      model_invalid: "Validation échouée : %{errors}"
-      not_a_number: n'est pas un nombre
-      not_an_integer: doit être un nombre entier
-      odd: doit être impair
-      required: doit exister
-      taken: n'est pas disponible
+      accepted: 必须接受
+      blank: 必填
+      present: 现在是空的
+      confirmation: 与％{attribute}不符
+      empty: 必填
+      equal_to: 必须等于％{count}
+      even: 必须是均匀的
+      exclusion: 不可用
+      greater_than: 必须大于％{count}
+      greater_than_or_equal_to: 必须大于或等于％{count}
+      inclusion: 不包括在列表中
+      invalid: 无效
+      less_than: 必须小于％{count}
+      less_than_or_equal_to: 必须小于或等于％{count}
+      model_invalid: "验证失败：％{errors}"
+      not_a_number: 必须是数字
+      not_an_integer: 必须是整数
+      odd: 必须是奇数
+      required: 必须存在
+      taken: 不可用
       too_long:
-        one: est trop long (pas plus d'un caractère)
-        other: est trop long (pas plus de %{count} caractères)
+        one: 太长（不超过一个字符）
+        other: 太长（不超过％{count}个字符）
       too_short:
-        one: est trop court (au moins un caractère)
-        other: est trop court (au moins %{count} caractères)
+        one: 太短（至少一个字符）
+        other: 太短（至少％{count}个字符）
       wrong_length:
-        one: ne fait pas la bonne longueur (doit comporter un seul caractère)
-        other: ne fait pas la bonne longueur (doit comporter %{count} caractères)
-      other_than: doit être différent de %{count}
+        one: 不做正确的长度（必须有一个字符）
+        other: 没有正确的长度（必须有％{count}个字符）
+      other_than: 必须与％{count}不同
     template:
-      body: 'Veuillez vérifier les champs suivants : '
+      body: '请检查以下字段：'
       header:
-        one: 'Impossible d''enregistrer ce(tte) %{model} : 1 erreur'
-        other: 'Impossible d''enregistrer ce(tte) %{model} : %{count} erreurs'
+        one: '无法保存此％{model}：1错误'
+        other: '无法保存此％{model}：％{count}错误'
   helpers:
     select:
-      prompt: Veuillez sélectionner
+      prompt: 请选择
     submit:
-      create: Créer un(e) %{model}
-      submit: Enregistrer ce(tte) %{model}
-      update: Modifier ce(tte) %{model}
+      create: 创建一个％{model}
+      submit: 保存此％{model}
+      update: 编辑此 %{model}
   number:
     currency:
       format:
@@ -192,11 +192,11 @@ fr:
       decimal_units:
         format: "%n %u"
         units:
-          billion: milliard
-          million: million
-          quadrillion: million de milliards
-          thousand: millier
-          trillion: billion
+          billion: 十亿
+          million: 百万
+          quadrillion: 亿
+          thousand: 千
+          trillion: 亿
           unit: ''
       format:
         delimiter: ''
@@ -207,12 +207,12 @@ fr:
         format: "%n %u"
         units:
           byte:
-            one: octet
-            other: octets
-          gb: Go
-          kb: ko
-          mb: Mo
-          tb: To
+            one: byte
+            other: byte
+          gb: gb
+          kb: kb
+          mb: mb
+          tb: tb
     percentage:
       format:
         delimiter: ''
@@ -222,8 +222,8 @@ fr:
         delimiter: ''
   support:
     array:
-      last_word_connector: " et "
-      two_words_connector: " et "
+      last_word_connector: " and "
+      two_words_connector: " and "
       words_connector: ", "
   time:
     am: am
