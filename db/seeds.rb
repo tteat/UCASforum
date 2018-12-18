@@ -1,6 +1,6 @@
 # Dataset
 users_count = 20
-friends_count = 200
+friends_count = 50
 
 first_names_male = %w[
   Jules Léo Maël Gabriel Raphaël Sacha Hugo Ethan Arthur Nathan Louis
@@ -79,7 +79,7 @@ i = 0
 friends_count.times do
   i += 1
   male = i <= friends_count / 2
-  img = (male ? "male/#{i}" : "female/#{i-100}") + '.jpg'
+  img = (male ? "male/#{i}" : "female/#{i-25}") + '.jpg'
   first_name = (male ? first_names_male : first_names_female).sample
   date = (date_min + (date_max - date_min) * rand).to_date
   friends << Friend.create!(
