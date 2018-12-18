@@ -6,9 +6,9 @@
 
   <div class="form-group">
     <%= f.label :password, "Nouveau mot de passe", class: "font-weight-bold" %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "Mot de passe", class: "form-control" %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "off", placeholder: "密码", class: "form-control" %>
     <% if @minimum_password_length %>
-      <small class="form-text text-muted"><%= @minimum_password_length %> caractères minimum</small>
+      <small class="form-text text-muted">最少<%= @minimum_password_length %>个字符</small>
     <% end %>
   </div>
 
@@ -18,7 +18,7 @@
   </div>
 
   <div class="actions">
-    <%= link_to "Retour", :back, class: "btn btn-outline-secondary" %>
+    <%= link_to "返回", :back, class: "btn btn-outline-secondary" %>
     <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
   </div>
 <% end %>
