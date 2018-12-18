@@ -49,7 +49,7 @@ fr:
       signed_out: "断开连接"
       already_signed_out: "已断开连接"
     unlocks:
-      send_instructions: ""您将在短时间内收到解锁帐户的必要说明
+      send_instructions: "您将在短时间内收到解锁帐户的必要说明"
       send_paranoid_instructions: "如果您的帐户存在，您很快就会收到一封电子邮件，其中包含解锁邮件的说明。"
       unlocked: "您的帐户已成功解锁，您现已登录。"
   errors:
