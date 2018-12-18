@@ -81,7 +81,7 @@ class Friend < ApplicationRecord
   private
 
   def disable_while_exchanged
-    errors.add(:disabled, ': impossible de désactiver pendant un échange en cours') if disabled && !available?
+      errors.add(:disabled, ': 在Exchange正在进行中无法禁用') if disabled && !available?
   end
 
   def validate_age
@@ -93,6 +93,6 @@ class Friend < ApplicationRecord
   def check_tags_count
     # Using length as they are not saved in database yet
     l = tag_relations.length
-    errors.add(:tags, ': choisis entre 2 et 5 tags') if l < Tag::MIN_ASSOC || l > Tag::MAX_ASSOC
+    errors.add(:tags, ': 选择2到5个标签') if l < Tag::MIN_ASSOC || l > Tag::MAX_ASSOC
   end
 end

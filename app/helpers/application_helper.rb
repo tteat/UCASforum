@@ -32,7 +32,7 @@ module ApplicationHelper
     if object.errors.any?
       content_tag(:div, class: 'alert alert-danger') do
         concat(content_tag(:h4, class: 'alert-heading') do
-          concat "#{pluralize(object.errors.count, 'erreur')} à corriger:"
+          concat "#{pluralize(object.errors.count, '错误')} 纠正："
         end)
         object.errors.full_messages.each do |msg|
           concat content_tag(:p, msg, class: 'm-0')

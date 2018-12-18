@@ -55,25 +55,25 @@ class Exchange < ApplicationRecord
   end
 
   def check_different
-    errors.add(:base, "Impossible d'échanger un ami contre lui même") unless friend_initier.id != friend_receiver.id
+    errors.add(:base, "不能交朋友反对自己") unless friend_initier.id != friend_receiver.id
   end
 
   def check_available
-    errors.add(:base, "Un des amis n'est pas disponible") unless friend_initier.available? && friend_receiver.available?
+    errors.add(:base, "其中一位朋友不在") unless friend_initier.available? && friend_receiver.available?
   end
 
   def check_unavailable
-    errors.add(:base, "L'échange est déjà terminé") if is_active
+    errors.add(:base, "交换已经完成") if is_active
   end
 
   def check_owner
-    errors.add(:base, "Impossible d'échanger deux amis du même utilisateur") unless friend_initier.user.id != friend_receiver.user.id
+    errors.add(:base, "无法交易同一用户的两个朋友") unless friend_initier.user.id != friend_receiver.user.id
   end
 
   def check_tags_count
     # Using length as they are not saved in database yet
     # length - count = how many tags in total - how many in database = how many are added
     l = tag_relations.length - tag_relations.count
-    errors.add(:tags, ': choisis entre 2 et 5 tags') if l != 0 && (l < Tag::MIN_ASSOC || l > Tag::MAX_ASSOC)
+    errors.add(:tags, ': 选择2到5个标签') if l != 0 && (l < Tag::MIN_ASSOC || l > Tag::MAX_ASSOC)
   end
 end

@@ -35,7 +35,7 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to @friend, notice: 'Ajout avec succès !' }
+        format.html { redirect_to @friend, notice: '添加成功！' }
         format.json { render :show, status: :created, location: @friend }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class FriendsController < ApplicationController
   def update
     respond_to do |format|
       if @friend.update(friend_params_update)
-        format.html { redirect_to @friend, notice: 'Informations sauvegardés !' }
+        format.html { redirect_to @friend, notice: '保存的信息！' }
         format.json { render :show, status: :ok, location: @friend }
       else
         format.html { render :edit }
