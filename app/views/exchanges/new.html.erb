@@ -1,7 +1,7 @@
 
 <div class="header header-4">
   <div class="container">
-    <h1>Nouvel échange</h1>
+    <h1>新的交流</h1>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
       <%= errors_for @exchange %>
 
       <div class="text-center">
-        <h3>Échanger</h3>
+        <h3>交换</h3>
       </div>
 
       <div class="card bg-light my-3">
@@ -38,8 +38,8 @@
         <%= hidden_field(:exchange, :friend_initier_id, :value => @friend.id) %>
         <%= hidden_field(:exchange, :friend_receiver_id, :value => @other.id) %>
         <div class="text-center">
-          <%= link_to "Annuler", @other, class: "btn btn-outline-secondary" %>
-          <%= submit_tag "C'est parti !", class: "btn btn-primary" %>
+          <%= link_to "取消", @other, class: "btn btn-outline-secondary" %>
+          <%= submit_tag "它消失了！", class: "btn btn-primary" %>
         </div>
       <% end %>
 

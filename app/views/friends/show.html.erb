@@ -18,7 +18,7 @@
   <p class="mb-1">
     <em>
       <%= age @friend.birthday %> ans,
-      <%= @friend.is_male ? 'homme' : 'femme' %>,
+      <%= @friend.is_male ? '男' : '女' %>,
       à <%= @friend.city.name %>
     </em>
   </p>
@@ -60,7 +60,7 @@
     <%= @friend.description %>
   </p>
 
-  <h5 class="mt-4">Tags:</h5>
+  <h5 class="mt-4">标签:</h5>
   <% @friend.tags_sorted.each do |tag| %>
     <p class="m-0">
       <big><%= tag.second %></big>

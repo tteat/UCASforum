@@ -7,9 +7,9 @@
         <%= errors_for friend %>
 
         <div class="form-group">
-          <%= form.label :avatar, "Avatar", class: "font-weight-bold" %>
+          <%= form.label :avatar, "书籍图片", class: "font-weight-bold" %>
           <%= form.file_field :avatar, id: :avatar, class: "form-control-file" %>
-          <small class="form-text text-muted">De préférence de taille minimum 900x600</small>
+          <small class="form-text text-muted">最小尺寸为900x600</small>
         </div>
 
         <% if mode == :new %>
@@ -17,13 +17,13 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <%= form.label :first_name, "Prénom", class: "font-weight-bold" %>
-                <%= form.text_field :first_name, id: :friend_first_name, class: "form-control", placeholder: "Prénom" %>
+                <%= form.label :first_name, "名字", class: "font-weight-bold" %>
+                <%= form.text_field :first_name, id: :friend_first_name, class: "form-control", placeholder: "名字" %>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <%= form.label :birthday, "Date de naissance", class: "font-weight-bold" %>
+                <%= form.label :birthday, "出生日期", class: "font-weight-bold" %>
                 <div class="form-inline">
                   <%= form.date_select :birthday, {
                     :start_year => 13.years.ago.year,
@@ -38,25 +38,25 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <%= form.label :city_id, "Ville", class: "font-weight-bold" %>
+                <%= form.label :city_id, "城市", class: "font-weight-bold" %>
                 <%= form.select :city_id, options_for_select(City.all.map { |c| [c.name, c.id] }), {}, class: "form-control" %>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <div>
-                  <%= form.label :is_male, "Genre", class: "font-weight-bold" %>
+                  <%= form.label :is_male, "性别", class: "font-weight-bold" %>
                 </div>
                 <div class="form-check form-check-inline">
                   <label class="custom-control custom-radio">
                     <%= form.radio_button :is_male, true, checked: true, value: true, class: "custom-control-input" %>
                     <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Homme</span>
+                    <span class="custom-control-description">男</span>
                   </label>
                   <label class="custom-control custom-radio">
                     <%= form.radio_button :is_male, false, checked: false, value: false, class: "custom-control-input" %>
                     <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Femme</span>
+                    <span class="custom-control-description">女</span>
                   </label>
                 </div>
               </div>
@@ -77,7 +77,7 @@
                   </span>
                 </label>
               <% end %>
-              <small class="form-text text-muted">Choisissez entre 2 et 5 tags</small>
+              <small class="form-text text-muted">选择2-5个标签</small>
             </div>
           </div>
 
@@ -85,13 +85,13 @@
 
           <div class="form-group">
             <div>
-              <%= form.label :disabled, "Désactivé", class: "font-weight-bold" %>
+              <%= form.label :disabled, "disabled", class: "font-weight-bold" %>
             </div>
             <div>
               <label class="custom-control custom-checkbox">
                 <%= form.check_box :disabled, id: :friend_disabled, class: "custom-control-input" %>
                 <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Désactivé</span>
+                <span class="custom-control-description">disabled</span>
               </label>
             </div>
           </div>
@@ -101,14 +101,14 @@
         <div class="form-group">
           <%= form.label :description, class: "font-weight-bold" %>
           <%= form.text_area :description, id: :friend_description, class: "form-control" %>
-          <small class="form-text text-muted">Entrez entre 10 et 500 caractères</small>
+          <small class="form-text text-muted">10-500个字</small>
         </div>
 
         <div class="actions mb-3">
           <% if mode == :new %>
-            <%= form.submit "Ajouter", class: "btn btn-primary btn-block" %>
+            <%= form.submit "添加", class: "btn btn-primary btn-block" %>
           <% else %>
-            <%= form.submit "Mettre à jour", class: "btn btn-primary btn-block" %>
+            <%= form.submit "更新", class: "btn btn-primary btn-block" %>
           <% end %>
         </div>
       <% end %>

@@ -1,7 +1,7 @@
 
 <div class="header header-4">
   <div class="container">
-    <h1>Terminer l'échange</h1>
+    <h1>结束交流</h1>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
       <%= errors_for @exchange %>
 
       <div class="text-center">
-        <h3>C'est fini ?</h3>
+        <h3>要结束吗？</h3>
       </div>
 
       <div class="card bg-light my-3">
@@ -39,8 +39,8 @@
       <%= form_tag(exchanges_post_finish_path) do %>
         <%= hidden_field(nil, :id, :value => @exchange.id) %>
         <div class="text-center">
-          <%= link_to "Pas encore", exchanges_path, class: "btn btn-outline-secondary" %>
-          <%= submit_tag "Fin de parcours", class: "btn btn-primary" %>
+          <%= link_to "再等等", exchanges_path, class: "btn btn-outline-secondary" %>
+          <%= submit_tag "当然结束", class: "btn btn-primary" %>
         </div>
       <% end %>
 

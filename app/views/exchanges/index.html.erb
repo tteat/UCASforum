@@ -1,7 +1,7 @@
 
 <div class="header header-4">
   <div class="container">
-    <h1>Mes échanges</h1>
+    <h1>我的交流</h1>
   </div>
 </div>
 
@@ -11,13 +11,13 @@
   <ul class="nav nav-tabs nav-tabs-center">
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#exchanges-actives">
-        Actifs
+        正在交流
         <span class="badge badge-pill badge-primary"><%= @exchanges_active.size %></span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#exchanges-past">
-        Passés
+        历史记录
         <span class="badge badge-pill badge-secondary"><%= @exchanges_past.size %></span>
       </a>
     </li>
@@ -58,7 +58,7 @@
               </div>
             </div>
           <% end.empty? %>
-            <h4 class="mt-3 text-center text-muted">Aucun échange actif</h4>
+            <h4 class="mt-3 text-center text-muted">还没有交流哦~</h4>
           <% end %>
 
         </div>
@@ -104,7 +104,7 @@
               </div>
             </div>
           <% end.empty? %>
-            <h4 class="mt-3 text-center text-muted">Aucun échange passés</h4>
+            <h4 class="mt-3 text-center text-muted">没有历史交流</h4>
           <% end %>
 
         </div>

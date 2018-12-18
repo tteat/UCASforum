@@ -1,7 +1,7 @@
 
 <div class="header header-4">
   <div class="container">
-    <h1>Noter l'échange</h1>
+    <h1>注意交换</h1>
   </div>
 </div>
 
@@ -13,7 +13,7 @@
       <%= errors_for @exchange %>
 
       <div class="text-center">
-        <h3>Que dire sur <%= @friend.first_name %> ?</h3>
+        <h3>怎么说<%= @friend.first_name %> ?</h3>
       </div>
 
       <%= form_tag(exchanges_post_rate_path) do %>
@@ -31,11 +31,11 @@
               </span>
             </label>
           <% end %>
-          <small class="form-text text-muted">Choisissez entre 2 et 5 tags</small>
+          <small class="form-text text-muted">选择2到5个标签</small>
         </div>
 
         <div class="text-center">
-          <%= submit_tag "Valider", class: "btn btn-primary" %>
+          <%= submit_tag "验证", class: "btn btn-primary" %>
         </div>
       <% end %>
 

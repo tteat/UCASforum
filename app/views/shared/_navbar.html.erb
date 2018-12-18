@@ -1,28 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
   <div class="container">
-    <%= link_to "UCAS交流平台", root_path, class: "navbar-brand" %>
+    <%= link_to "BOOKSEA", root_path, class: "navbar-brand" %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarToggle">
       <ul class="navbar-nav mr-auto">
-        <%= nav_link "欢迎", root_path %>
+        <%= nav_link "首页", root_path %>
         <li class="nav-item">
-          <a class="nav-link" href="#" data-toggle="modal" data-target="#search-modal">找朋友</a>
+          <a class="nav-link" href="#" data-toggle="modal" data-target="#search-modal">搜索</a>
         </li>
       </ul>
       <ul class="nav navbar-nav ml-auto">
         <% if user_signed_in? %>
-          <%= nav_link "Mes échanges", exchanges_path %>
+          <%= nav_link "我的交易", exchanges_path %>
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="account" aria-expanded="false">
               <%= current_user.first_name %> <span class="caret"></span>
             </a>
             <div class="dropdown-menu" aria-labelledby="account">
-              <%= link_to "我的朋友", friends_path, class: "dropdown-item" %>
-              <%= link_to "加为好友", new_friend_path, class: "dropdown-item" %>
+              <%= link_to "我的书籍", friends_path, class: "dropdown-item" %>
+              <%= link_to "添加书籍", new_friend_path, class: "dropdown-item" %>
               <div class="dropdown-divider"></div>
               <%= link_to "设置", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "注销", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
@@ -42,7 +42,7 @@
     <%= form_tag(search_post_path) do %>
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="search-modal-label">Rechercher</h5>
+          <h5 class="modal-title" id="search-modal-label">搜索</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -51,9 +51,9 @@
 
             <div class="form-group">
               <div class="input-group">
-                  <input type="text" class="form-control search-form" placeholder="Rechercher un tag ou une ville..." aria-label="Rechercher un tag ou une ville...">
+                  <input type="text" class="form-control search-form" placeholder="搜索标签或城市......" aria-label="搜索标签或城市.......">
                   <span class="input-group-btn">
-                    <button class="btn btn-secondary search-reset" type="button">Reset</button>
+                    <button class="btn btn-secondary search-reset" type="button">重置</button>
                   </span>
                 </div>
             </div>
@@ -87,8 +87,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-          <%= submit_tag "Rechercher", class: "btn btn-primary" %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+          <%= submit_tag "搜索", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>
