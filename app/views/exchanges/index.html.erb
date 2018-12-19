@@ -83,7 +83,7 @@
                   </div>
                   <div class="col-sm-4">
                     <p>
-                      Terminé le:
+                      完成：
                       <%= exchange.end_date.strftime("%m/%d/%Y à %H:%M:%S") %>
 
                       (<%= (exchange.end_date.to_date - exchange.start_date.to_date).to_i %> jours)
@@ -91,7 +91,7 @@
                     <% unless exchange_rated %>
                       <%= link_to "Noter", exchanges_get_rate_path(id: exchange.id), class: 'btn btn-primary' %>
                     <% else %>
-                      <button class="btn btn-outline-primary disabled" disabled>Déjà noté</button>
+                      <button class="btn btn-outline-primary disabled" disabled>已经注意到了</button>
                     <% end %>
                   </div>
                   <div class="col-sm-4">
