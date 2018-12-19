@@ -35,11 +35,11 @@
         </button>
       <% elsif current_user.friends.empty? %>
         <button class="btn btn-outline-primary" disabled>
-          没有书籍可以交换
+          没有书籍可交换
         </button>
       <% elsif @friend.available? %>
         <button class="btn btn-outline-primary" disabled>
-          没有书籍可用
+          没有书籍可交换
         </button>
       <% else %>
         <button class="btn btn-outline-primary" disabled>
@@ -111,8 +111,8 @@
 
 </div>
 
-  <p class="mt-3">
-    <em>联系它的主人<%= @friend.is_male ? '' : '' %> 邮箱 :</em>
+  <p class="mt-3" style="text-align: center">
+    <em>联系它的主人  &nbsp;&nbsp;&nbsp;邮箱 :</em>
     <%= @friend.user.email %>
   </p>
 </div>

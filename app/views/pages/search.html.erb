@@ -1,7 +1,7 @@
 
 <div class="header header-1">
   <div class="container">
-    <h1>你的搜索</h1>
+    <h1>探索书籍</h1>
     <% if @tags.present? %>
       <p class="text-uppercase m-0">
         标签: <%= @tags.map { |tag| tag.label_male }.join ', ' %>
@@ -22,9 +22,9 @@
           <div class="card">
             <%= image_tag friend.avatar.url(:thumb), class: 'img-fluid' %>
             <div class="card-body">
-              <h4 class="m-0 tag-text"><%= friend.first_name %><small class="text-muted">, <%= age friend.birthday %></small></h4>
+              <h4 class="m-0 tag-text"><%= friend.first_name %></h4>
               <% friend.tags_sorted[0...3].each do |tag| %>
-                <span class="badge badge-info"><%= tag.second %>x <%= tag.first.label friend %></span>
+                <span class="badge badge-info"><%= tag.first.label friend %></span>
               <% end %>
               <p class="m-0 tag-text"><%= truncate(friend.description, length: 30) %></p>
             </div>

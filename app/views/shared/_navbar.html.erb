@@ -14,6 +14,7 @@
       </ul>
       <ul class="nav navbar-nav ml-auto">
         <% if user_signed_in? %>
+          <%= nav_link "活动", activities_path %>
           <%= nav_link "我的交换", exchanges_path %>
 
           <li class="nav-item dropdown">
@@ -51,7 +52,7 @@
 
             <div class="form-group">
               <div class="input-group">
-                  <input type="text" class="form-control search-form" placeholder="搜索标签或城市......" aria-label="搜索标签或城市.......">
+                  <input type="text" class="form-control search-form" placeholder="搜索标签或类别......" aria-label="搜索标签或类别.......">
                   <span class="input-group-btn">
                     <button class="btn btn-secondary search-reset" type="button">重置</button>
                   </span>
