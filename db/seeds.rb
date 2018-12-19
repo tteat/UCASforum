@@ -48,7 +48,7 @@ cities = []
 cities << City.create!(name: '科技', latitude: 48.86471, longitude: 2.34901)
 cities << City.create!(name: '文学', latitude: 45.74846, longitude: 4.84671)
 cities << City.create!(name: '生活', latitude: 43.60426, longitude: 1.44367)
-cities << City.create!(name: '人文社科', latitude: 44.83615, longitude: -0.58081)
+cities << City.create!(name: '教材', latitude: 44.83615, longitude: -0.58081)
 
 # Tags
 puts 'Creating 15 tags...'

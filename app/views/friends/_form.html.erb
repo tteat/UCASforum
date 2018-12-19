@@ -17,11 +17,11 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <%= form.label :first_name, "名字", class: "font-weight-bold" %>
+                <%= form.label :first_name, "书名", class: "font-weight-bold" %>
                 <%= form.text_field :first_name, id: :friend_first_name, class: "form-control", placeholder: "名字" %>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" style="display: none">
               <div class="form-group">
                 <%= form.label :birthday, "出生日期", class: "font-weight-bold" %>
                 <div class="form-inline">
@@ -38,25 +38,25 @@
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <%= form.label :city_id, "城市", class: "font-weight-bold" %>
+                <%= form.label :city_id, "类别", class: "font-weight-bold" %>
                 <%= form.select :city_id, options_for_select(City.all.map { |c| [c.name, c.id] }), {}, class: "form-control" %>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <div>
-                  <%= form.label :is_male, "性别", class: "font-weight-bold" %>
+                  <%= form.label :is_male, "语言", class: "font-weight-bold" %>
                 </div>
                 <div class="form-check form-check-inline">
                   <label class="custom-control custom-radio">
                     <%= form.radio_button :is_male, true, checked: true, value: true, class: "custom-control-input" %>
                     <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">男</span>
+                    <span class="custom-control-description">外文</span>
                   </label>
                   <label class="custom-control custom-radio">
                     <%= form.radio_button :is_male, false, checked: false, value: false, class: "custom-control-input" %>
                     <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">女</span>
+                    <span class="custom-control-description">中文</span>
                   </label>
                 </div>
               </div>
@@ -65,7 +65,7 @@
 
           <div class="form-group">
             <div>
-              <%= form.label :tags, "Tags", class: "font-weight-bold" %>
+              <%= form.label :tags, "标签", class: "font-weight-bold" %>
             </div>
             <div class="form-check form-check-inline">
               <%= collection_check_boxes(nil, :tag_id, Tag.all, :id, :label_male) do |b| %>
