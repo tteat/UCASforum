@@ -1,7 +1,7 @@
 
 <div class="header header-4">
   <div class="container">
-    <h1>新的交流</h1>
+    <h1>创建新的交换</h1>
   </div>
 </div>
 
@@ -24,7 +24,7 @@
               <%= @friend.first_name %>
             </div>
             <div class="col-sm-4">
-              <h5 class="mt-5">contre</h5>
+              <h5 class="mt-5">⇔</h5>
             </div>
             <div class="col-sm-4">
               <%= image_tag @other.avatar.url(:thumb), class: 'img-fluid img-thumbnail' %>
@@ -39,7 +39,7 @@
         <%= hidden_field(:exchange, :friend_receiver_id, :value => @other.id) %>
         <div class="text-center">
           <%= link_to "取消", @other, class: "btn btn-outline-secondary" %>
-          <%= submit_tag "它消失了！", class: "btn btn-primary" %>
+          <%= submit_tag "确定交换", class: "btn btn-primary" %>
         </div>
       <% end %>
 

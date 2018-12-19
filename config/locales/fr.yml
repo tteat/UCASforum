@@ -16,9 +16,9 @@ fr:
         first_name: "姓名"
         phone: "电话"
       friend:
-        avatar: "头像"
+        avatar: "图片"
         first_name: "姓名"
-        description: "描述"
+        description: "简介"
         disabled: "已禁用"
     errors:
       messages:
