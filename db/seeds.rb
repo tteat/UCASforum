@@ -2,29 +2,28 @@
 users_count = 20
 friends_count = 50
 
-first_names_male = %w[
-  Jules Léo Maël Gabriel Raphaël Sacha Hugo Ethan Arthur Nathan Louis
-  Lucas Tom Liam Gabin Paul Clément Théo Noé Antoine Nolan Axel Valentin
-  Mathis Maxence Timéo Baptiste Noah Aaron Eliott Maxime Martin Victor
-  Enzo Marius Robin Malo Samuel Alexis Estéban Mathéo Thomas Léon Noa
-  Sasha Adam Marceau Antonin Augustin Mahé
+first_names_male = [
+    "Data Mining", "The ABC Murders","PRIDE AND PREJUDICE","THE GRAPES OF WRATH","UTRILLO","Je mange ce qui me reussit",
+    "CAROL SHIELDS","modern greece","PRACTICAL ETHICS FOR YOU","FOREIGN AFFAIRS","仁成","THE DRY","HURDLING STEEPLECHASING",
+    "US AND THEM","THE REVENGE OF GAIA","GHOSTLY ENCOUNI IN SINGAPORE","FALL OF ANGELS","THE BACK OF THE NAPKIN","THE 7 HABITS",
+    "CODES OF LOVE","LAPITTURA ITALIANA","HARRY POTTER","CATHETINE COULTER","STATISTICS","THE WASTE LAND"
 ]
 
 first_names_female = %w[
-  Emma Louise Léna Chloé Camille Manon Jade Alice Léa Zoé Lola Mila
-  Julia Inès Agathe Juliette Lucie Élise Eden Rose Ambre Mia Éléna
-  Léonie Lou Anna Margaux Léana Clémence Capucine Clara Eva Romane
-  Mathilde Soline Jeanne Maëlys Charlotte Noémie Nina Olivia Justine
-  Lilou Louna Candice Emy Giulia Elsa Charlie Léane
+  动物农庄 计算机体系结构 Linux内核设计 软件工程 大清十二帝 Chrome扩展开发 月亮和六便士 数学之美 C++ 爱与生的苦恼 Java编程思想 史记
+  算法讲义 旧山河 无声告白 哲学家们都干了些什么 人间失格 倚天屠龙记 我们仨 白说 活着 你好旧时光 半小时漫画中国史
+  目送 我这一辈子
 ]
 
 first_names = first_names_male + first_names_female
 
 descriptions = [
-  'Son nom est %s.',
-  'Voici %s.',
-  'Description de %s.',
-  '%s est dispo.'
+  '%s这本书生动有趣',
+  '%s脑洞很大，值得品读',
+  '%s有助于课程的学习',
+  '%s故事耐人寻味，引人入胜.',
+  '%s讲述了动人心魄的数学故事'
+
 ]
 
 # Create users
@@ -49,7 +48,7 @@ cities = []
 cities << City.create!(name: '科技', latitude: 48.86471, longitude: 2.34901)
 cities << City.create!(name: '文学', latitude: 45.74846, longitude: 4.84671)
 cities << City.create!(name: '生活', latitude: 43.60426, longitude: 1.44367)
-cities << City.create!(name: '人文社科', latitude: 44.83615, longitude: -0.58081)
+cities << City.create!(name: '教材', latitude: 44.83615, longitude: -0.58081)
 
 # Tags
 puts 'Creating 15 tags...'
@@ -65,10 +64,10 @@ tags << Tag.create!(label_male: '青春言情', label_female: '青春言情')
 tags << Tag.create!(label_male: '经济管理', label_female: '经济管理')
 tags << Tag.create!(label_male: '社交之道', label_female: '社交之道')
 tags << Tag.create!(label_male: '心理百科', label_female: '心理百科')
-tags << Tag.create!(label_male: '历史小说', label_female: '历史小说')
 tags << Tag.create!(label_male: '科幻武侠', label_female: '科幻武侠')
 tags << Tag.create!(label_male: '美食烹饪', label_female: '美食烹饪')
 tags << Tag.create!(label_male: '旅游摄影', label_female: '旅游摄影')
+tags << Tag.create!(label_male: '其它', label_female: '其它')
 
 # Friends
 puts "Creating #{friends_count} friends, linked to ~#{friends_count * 3} tags..."
@@ -80,7 +79,7 @@ friends_count.times do
   i += 1
   male = i <= friends_count / 2
   img = (male ? "male/#{i}" : "female/#{i-25}") + '.jpg'
-  first_name = (male ? first_names_male : first_names_female).sample
+  first_name = male ? first_names_male[i-1] : first_names_female[i-26]
   date = (date_min + (date_max - date_min) * rand).to_date
   friends << Friend.create!(
     avatar: File.new("#{Rails.root}/app/assets/images/seeds/friends/#{img}"),
