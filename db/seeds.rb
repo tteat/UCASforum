@@ -64,10 +64,10 @@ tags << Tag.create!(label_male: '青春言情', label_female: '青春言情')
 tags << Tag.create!(label_male: '经济管理', label_female: '经济管理')
 tags << Tag.create!(label_male: '社交之道', label_female: '社交之道')
 tags << Tag.create!(label_male: '心理百科', label_female: '心理百科')
-tags << Tag.create!(label_male: '历史小说', label_female: '历史小说')
 tags << Tag.create!(label_male: '科幻武侠', label_female: '科幻武侠')
 tags << Tag.create!(label_male: '美食烹饪', label_female: '美食烹饪')
 tags << Tag.create!(label_male: '旅游摄影', label_female: '旅游摄影')
+tags << Tag.create!(label_male: '其它', label_female: '其它')
 
 # Friends
 puts "Creating #{friends_count} friends, linked to ~#{friends_count * 3} tags..."
