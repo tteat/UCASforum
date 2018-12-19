@@ -1,0 +1,106 @@
+
+<div class="header header-4">
+  <div class="container">
+    <h1>活动</h1>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <%= render partial: "shared/flash", flash: flash %>
+
+  <ul class="nav nav-tabs nav-tabs-center">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#exchanges-actives">
+        正在进行
+<!--        <span class="badge badge-pill badge-primary"><%#= @exchanges_active.size %></span>-->
+        <span class="badge badge-pill badge-primary">0</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#exchanges-past">
+        历史活动
+<!--        <span class="badge badge-pill badge-secondary"><%#= @exchanges_past.size %></span>-->
+        <span class="badge badge-pill badge-secondary">0</span>
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="exchanges-actives">
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+          <%# if @exchanges_active.each do |exchange| %>
+            <%# friends = distinct_friends exchange %>
+<!--            <div class="card bg-light my-3">-->
+<!--              <div class="card-body text-center">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-sm-4">-->
+                    <%#= link_to friends.first, class: 'link-clean' do %>
+                      <%#= image_tag friends.first.avatar.url(:thumb), class: 'img-fluid img-thumbnail' %>
+                      <%#= friends.first.first_name %>
+                    <%# end %>
+<!--                  </div>-->
+<!--                  <div class="col-sm-4">-->
+<!--                    <p>-->
+<!--                     开始于：-->
+                      <%#= exchange.start_date.strftime("%m/%d/%Y  %H:%M:%S") %>
+<!--                    </p>-->
+<!--                    <p>-->
+                      <%#= link_to '结束活动', exchanges_get_finish_path(id: exchange.id), class: 'btn btn-primary' %>
+<!--                    </p>-->
+<!--                  </div>-->
+<!--                  <div class="col-sm-4">-->
+                    <%#= link_to friends.second, class: 'link-clean' do %>
+                      <%#= image_tag friends.second.avatar.url(:thumb), class: 'img-fluid img-thumbnail' %>
+                      <%#= friends.second.first_name %>
+                    <%# end %>
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          <%# end.empty? %>
+            <h4 class="mt-3 text-center text-muted">还没有活动记录哦~</h4>
+          <%# end %>
+
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="exchanges-past">
+
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+          <%# if @exchanges_past.each do |exchange| %>
+            <%# friends = distinct_friends exchange %>
+            <%# exchange_rated = exchange.friend_rated? friends.second %>
+<!--            <div class="card bg-light my-3">-->
+<!--              <div class="card-body text-center">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-sm-4">-->
+                    <%#= link_to friends.first, class: 'link-clean' do %>
+                      <%#= image_tag friends.first.avatar.url(:thumb), class: 'img-fluid img-thumbnail' %>
+                      <%#= friends.first.first_name %>
+                    <%# end %>
+<!--                  </div>-->
+
+<!--                  <div class="col-sm-4">-->
+                    <%#= link_to friends.second, class: 'link-clean' do %>
+                      <%#= image_tag friends.second.avatar.url(:thumb), class: 'img-fluid img-thumbnail' %>
+                      <%#= friends.second.first_name %>
+                    <%# end %>
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          <%# end.empty? %>
+            <h4 class="mt-3 text-center text-muted">没有历史活动</h4>
+          <%# end %>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
