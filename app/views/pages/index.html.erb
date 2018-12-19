@@ -2,12 +2,14 @@
 <div class="header header-lg">
   <div class="container">
     <h1>BOOKSEA </h1>
-    <p class="text-uppercase">UCAS 不可思议</p>
+    <p class="text-uppercase" style="font-size: larger">UCAS 不可思议</p>
+    <div class="text-uppercase" style="text-align: right; font-size: 25px; margin-right: 100px; font-family:'Al Tarikh'">交换书籍</div>
+    <p class="text-uppercase" style="text-align: right; font-size: 25px">       沟通你我！</p>
   </div>
 </div>
 
 <div class="container">
-  <h3 class="mt-5 mb-3">探索书籍</h3>
+  <h3 class="mt-5 mb-3">书籍分类</h3>
 
   <div class="row">
     <% @tags_by_city.each do |tag| %>
@@ -30,7 +32,7 @@
     <% end %>
   </div>
 
-  <h3 class="mt-4 mb-3">那些书籍</h3>
+  <h3 class="mt-4 mb-3">热门书籍</h3>
 
   <div class="row">
     <% @most_traded.limit(20).each do |friend| %>
@@ -41,9 +43,9 @@
             <div class="card-body">
               <h4 class="m-0 tag-text"><%= friend.first_name %></h4>
               <% friend.tags_sorted[0...3].each do |tag| %>
-                <span class="badge badge-info"><%= tag.second %>x <%= tag.first.label friend %></span>
+                <span class="badge badge-info"><%= tag.first.label friend %></span>
               <% end %>
-              <p class="m-0 tag-text">交易 <%= friend.exchanges_count %> fois</p>
+              <p class="m-0 tag-text">交换 <%= friend.exchanges_count %> 次</p>
             </div>
           </div>
         <% end %>

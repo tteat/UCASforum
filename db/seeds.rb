@@ -18,10 +18,12 @@ first_names_female = %w[
 first_names = first_names_male + first_names_female
 
 descriptions = [
-  'Son nom est %s.',
-  'Voici %s.',
-  'Description de %s.',
-  '%s est dispo.'
+  '%s这本书生动有趣',
+  '%s脑洞很大，值得品读',
+  '%s有助于课程的学习',
+  '%s故事耐人寻味，引人入胜.',
+  '%s讲述了动人心魄的数学故事'
+
 ]
 
 # Create users
@@ -77,7 +79,7 @@ friends_count.times do
   i += 1
   male = i <= friends_count / 2
   img = (male ? "male/#{i}" : "female/#{i-25}") + '.jpg'
-  first_name = (male ? first_names_male : first_names_female).sample
+  first_name = male ? first_names_male[i-1] : first_names_female[i-26]
   date = (date_min + (date_max - date_min) * rand).to_date
   friends << Friend.create!(
     avatar: File.new("#{Rails.root}/app/assets/images/seeds/friends/#{img}"),
