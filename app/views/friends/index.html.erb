@@ -21,7 +21,7 @@
               <h4 class="m-0 tag-text">
                 <%= friend.first_name %><small class="text-muted">,
                   <% if friend.disabled? %>
-                    <span class="text-danger"><%= friend.is_male ? 'désactivé' : 'désactivée' %></span>
+                    <span class="text-danger"><%= friend.is_male ? 'disabled' : 'disabled' %></span>
                   <% elsif friend.available? %>
                     <span class="text-success"><%= friend.is_male ? 'actif' : 'active' %></span>
                   <% else %>
