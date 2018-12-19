@@ -1,7 +1,7 @@
 
 <div class="header header-4">
   <div class="container">
-    <h1>我的交流</h1>
+    <h1>我的交换</h1>
   </div>
 </div>
 
@@ -11,7 +11,7 @@
   <ul class="nav nav-tabs nav-tabs-center">
     <li class="nav-item">
       <a class="nav-link active" data-toggle="tab" href="#exchanges-actives">
-        正在交流
+        正在交换
         <span class="badge badge-pill badge-primary"><%= @exchanges_active.size %></span>
       </a>
     </li>
@@ -41,11 +41,11 @@
                   </div>
                   <div class="col-sm-4">
                     <p>
-                      Débuté le:
-                      <%= exchange.start_date.strftime("%m/%d/%Y à %H:%M:%S") %>
+                     开始于：
+                      <%= exchange.start_date.strftime("%m/%d/%Y  %H:%M:%S") %>
                     </p>
                     <p>
-                      <%= link_to 'Rendre', exchanges_get_finish_path(id: exchange.id), class: 'btn btn-primary' %>
+                      <%= link_to '结束交换', exchanges_get_finish_path(id: exchange.id), class: 'btn btn-primary' %>
                     </p>
                   </div>
                   <div class="col-sm-4">
@@ -58,7 +58,7 @@
               </div>
             </div>
           <% end.empty? %>
-            <h4 class="mt-3 text-center text-muted">还没有交流哦~</h4>
+            <h4 class="mt-3 text-center text-muted">还没有交换记录哦~</h4>
           <% end %>
 
         </div>
@@ -83,15 +83,15 @@
                   </div>
                   <div class="col-sm-4">
                     <p>
-                      完成：
-                      <%= exchange.end_date.strftime("%m/%d/%Y à %H:%M:%S") %>
+                      结束于：
+                      <%= exchange.end_date.strftime("%m/%d/%Y  %H:%M:%S") %>
 
-                      (<%= (exchange.end_date.to_date - exchange.start_date.to_date).to_i %> jours)
+                      (<%= (exchange.end_date.to_date - exchange.start_date.to_date).to_i %> 天)
                     </p>
                     <% unless exchange_rated %>
-                      <%= link_to "Noter", exchanges_get_rate_path(id: exchange.id), class: 'btn btn-primary' %>
+                      <%= link_to "评价", exchanges_get_rate_path(id: exchange.id), class: 'btn btn-primary' %>
                     <% else %>
-                      <button class="btn btn-outline-primary disabled" disabled>已经注意到了</button>
+                      <button class="btn btn-outline-primary disabled" disabled>已评价</button>
                     <% end %>
                   </div>
                   <div class="col-sm-4">
@@ -104,7 +104,7 @@
               </div>
             </div>
           <% end.empty? %>
-            <h4 class="mt-3 text-center text-muted">没有历史交流</h4>
+            <h4 class="mt-3 text-center text-muted">没有历史交换</h4>
           <% end %>
 
         </div>
